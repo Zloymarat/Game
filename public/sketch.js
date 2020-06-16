@@ -129,7 +129,7 @@ function draw() {
   textSize(20);
   text(`За максимально короткое время удали и почисти зубы: ${seconds}`, 30, 30);
   
-  if (frameCount % 5 == 0) {
+  if (frameCount % 75 == 0) {
     seconds++;
   }  
 
