@@ -276,7 +276,17 @@ function gameOver() { //
     newInput.setAttribute('placeholder', 'Enter your name');
     newInput.setAttribute('maxlength', 20);
     newInput.required = true;
-    
+
+    let allBtn = document.createElement('button');
+    allBtn.textContent = "Get TOP3";
+    allBtn.setAttribute('class', 'top-btn');
+
+    let topDiv = document.createElement('div');
+    topDiv.setAttribute('class', 'top-list');
+
+    body.appendChild(allBtn);
+    body.appendChild(topDiv);
+
     body.appendChild(form);
     form.appendChild(newInput);
     form.appendChild(newBtn);
@@ -289,7 +299,7 @@ function gameOver() { //
           headers: {
               'Content-Type': 'application/json;charset=utf-8'
           },        
-          body: JSON.stringify({name: newInput.value, score: mushroomsScore})
+          body: JSON.stringify({name: newInput.value, score: seconds})
       })
       .then(resp => resp.json())
       .then(data => {
@@ -300,6 +310,31 @@ function gameOver() { //
       form.remove();
       e.preventDefault();     
     });
+    allBtn.addEventListener('click', (event) => {
+      fetch('/top/3')
+          .then(resp => resp.json())
+          .then(data => {
+              let ol = document.createElement('ol');
+              let jd = JSON.parse(data.top);
+              console.log(jd);
+              if(topDiv.hasChildNodes()) {
+                while (topDiv.firstChild) {
+                  topDiv.removeChild(topDiv.firstChild);
+                }
+                ol.remove();
+              }  
+              
+              for (let item of jd) {
+                console.log(item.username, item.score);
+                let li = document.createElement('li');
+                li.textContent = `${item.username}: \t${item.score}`;
+                ol.appendChild(li);
+              }
+              topDiv.appendChild(ol);
+          })
+          .catch(e => console.log(e));
+    });
+
   }                                           // 8 ДЗ
 }
 function restartGame(){

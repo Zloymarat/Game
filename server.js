@@ -9,7 +9,7 @@ app.use(bodyParser.json());
 
 const port = process.env.PORT || 8000;
 
-const db = new Datastore({ filename: '.data/db', autoload: true });
+const db = new Datastore({ filename: './data/db', autoload: true });
 
 app.get('/', (req, res) => {
     res.sendFile(__dirname + '/views/index.html');
@@ -21,19 +21,26 @@ app.get('/info', (req, res) => {
     })  
 });
 
-app.get('/top', (req, res) => {
+app.get('/top/:n', (req, res) => {
     db.find({}).sort({score: 1}).limit(req.params.n).exec((err, docs) => {
         res.send({"top": JSON.stringify(docs)});
-});
+    });
 });
 
-app.post('/save',(req, res) => {
-    let username = req.body.name;
-    let score = parseInt(rec.body.score);
+app.post('/save', (req, res) => {
+    try  {
+        let username = req.body.name.toString();
+        let score = parseInt(req.body.score);
 
-    db.insert({username: "Bot", score: 120}, (err, newDoc) => {   
-        console.log("New player added to db");
- }); 
+        db.insert({username: username, score: score}, (err, newDoc) => {   
+            console.log("New player added to db");
+            res.send({"status":"success"});
+        });
+    }
+    catch (e) {
+        console.log("Some error occured:" + e);
+        res.send("Wrong data recieved");
+    } 
 });
 
 app.listen(port, () => {
