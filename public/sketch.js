@@ -120,7 +120,7 @@ function draw() {
   if (collisionCount < 0){
     gameOver();
   }
-  if (collisionCount == +30){
+  if (collisionCount == +20){
     gameOver();
   }
   //
@@ -129,7 +129,7 @@ function draw() {
   textSize(20);
   text(`За максимально короткое время удали и почисти зубы: ${seconds}`, 30, 30);
   
-  if (frameCount % 70 == 0) {
+  if (frameCount % 5 == 0) {
     seconds++;
   }  
 
@@ -254,7 +254,7 @@ function gameOver() { //
   implant.remove();
   reset.remove();
 
-    if (collisionCount === 30) {             // 8ДЗ
+    if (collisionCount === 20) {             // 8ДЗ
     state = 'over'; 
     stateChanged = true;
   }
@@ -264,8 +264,8 @@ function gameOver() { //
     
     let form = document.createElement('form');
     form.style.position = "absolute";
-    form.style.top = "16%"; // отступ сверху
-    form.style.left = "40%"; 
+    form.style.top = "14%"; // отступ сверху
+    form.style.left = "35%"; 
     form.style.transform = "translateX(-50%)";
 
     let newBtn = document.createElement('button');
@@ -278,7 +278,7 @@ function gameOver() { //
     newInput.required = true;
 
     let allBtn = document.createElement('button');
-    allBtn.textContent = "Get TOP3";
+    allBtn.textContent = "TOP 3";
     allBtn.setAttribute('class', 'top-btn');
 
     let topDiv = document.createElement('div');
