@@ -265,7 +265,7 @@ function gameOver() { //
     let form = document.createElement('form');
     form.style.position = "absolute";
     form.style.top = "14%"; // отступ сверху
-    form.style.left = "27%"; 
+    form.style.left = "18%"; 
     form.style.transform = "translateX(-50%)";
 
     let newBtn = document.createElement('button');
