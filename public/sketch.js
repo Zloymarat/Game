@@ -129,7 +129,7 @@ function draw() {
   textSize(20);
   text(`За максимально короткое время удали и почисти зубы: ${seconds}`, 30, 30);
   
-  if (frameCount % 75 == 0) {
+  if (frameCount % 40 == 0) {
     seconds++;
   }  
 
@@ -264,7 +264,7 @@ function gameOver() { //
     
     let form = document.createElement('form');
     form.style.position = "absolute";
-    form.style.top = "14%"; // отступ сверху
+    form.style.top = "8%"; // отступ сверху
     form.style.left = "35%"; 
     form.style.transform = "translateX(-50%)";
 
