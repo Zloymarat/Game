@@ -120,7 +120,7 @@ function draw() {
   if (collisionCount < 0){
     gameOver();
   }
-  if (collisionCount == +20){
+  if (collisionCount == +30){
     gameOver();
   }
   //
@@ -204,7 +204,7 @@ function mousePressed() {
 }
   function takePoint(deletionlesGroup, deletion) {
   if (dirt.mass == 1) {
-    collisionCount = collisionCount + 10;
+    collisionCount = collisionCount - 10;
     deletion.mass = 0.5;
     deletion.remove();
   }
@@ -212,7 +212,7 @@ function mousePressed() {
 
   function addPoint1(deletionlesGroup, deletion) {
   if (deletion.mass == 1) {
-    collisionCount = collisionCount - 10;
+    collisionCount = collisionCount + 10;
     deletion.mass = 0.5;
     deletion.remove();
   }
@@ -254,7 +254,7 @@ function gameOver() { //
   implant.remove();
   reset.remove();
 
-    if (collisionCount === 20) {             // 8ДЗ
+    if (collisionCount === 30) {             // 8ДЗ
     state = 'over'; 
     stateChanged = true;
   }
